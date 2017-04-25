@@ -46,4 +46,5 @@ text-align: center;
 /*LOGIN PAGE*/
 h1 {
   color: green;
+  display: inline;
 }

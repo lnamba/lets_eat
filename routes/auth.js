@@ -4,9 +4,11 @@ var knex = require('../db/knex');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('auth/index');
+  res.render('auth/index', {
+    layout: 'layout.ejs',
+    title: 'Login'
+  });
 });
-
 
 //Route for setting the cookie upon login
 router.post('/', function(req, res, next) {
