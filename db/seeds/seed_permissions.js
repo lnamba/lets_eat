@@ -1,13 +1,13 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('permissions').del()
+  return knex('roles').del()
     .then(function () {
       // Inserts seed entries
-      return knex('permissions').insert([
-        {id: 1, permission_type: 'admin', user_id: 2},
-        {id: 2, permission_type: 'user', user_id: 1},
-        {id: 3, permission_type: 'user', user_id: 3}
+      return knex('roles').insert([
+        {id: 1, permission_type: 'admin'},
+        {id: 2, permission_type: 'user'},
+        {id: 3, permission_type: 'user'}
       ]);
     });
 };
