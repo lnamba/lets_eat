@@ -7,5 +7,32 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+
+      <span style="color:white">Users page.</span>
+      <br>
+      <caption style="font-size:25px; font-color:white; text-align: center">Users</caption>
+      <table style="width:70%">
+        <th>Name</th>
+        <th>Email</th>
+        <th>User Name</th>
+        <th>About</th>
+        <% for (var i = 0; i < users.length; i++) {%>
+          <tr>
+            <td>
+              <%= users[i].name %>
+                <td/>
+                <td>
+                  <%= users[i].email %>
+                </td>
+                <td>
+                  <%= users[i].username %>
+                </td>
+                <td>
+                  <%= users[i].about %>
+                </td>
+          </tr>
+          <% } %>
+      </table>
+      <br>
   </body>
 </html>
