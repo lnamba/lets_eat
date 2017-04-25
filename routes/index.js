@@ -6,4 +6,9 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Let\'s Eat' });
 });
 
+// router.get('/login', function(req, res, next) {
+//   res.render('login', { title: 'Express' });
+// });
+// //DELETE ABOVE BEFORE ADDING TO GITHUB
+
 module.exports = router;
