@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  res.redirect('/users/')
+  res.redirect('/users')
 });
 
 router.get('/logout', function(req, res, next) {
