@@ -27,7 +27,7 @@ router.post('/', function(req, res, next) {
 router.post('/:id', function(req, res, next) {
   knex.raw(`UPDATE suggestions SET accept_meal = TRUE WHERE id = ${req.params.id}`)
   .then(function() {
-    res.render('')
+    res.render('users/index')
   });
 });
 
