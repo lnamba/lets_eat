@@ -5,7 +5,10 @@ var knex = require('../db/knex');
 /* GET home page. */
 
 router.get('/', function(req, res, next) {
-  res.render('login/index');
+  res.render('login/index', {
+    layout: 'layout.ejs',
+    title: 'Login'
+  });
 });
 
 router.post('/', function(req, res, next) {
