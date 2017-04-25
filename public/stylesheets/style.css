@@ -6,3 +6,39 @@ body {
 a {
   color: #00B7FF;
 }
+
+table {
+font-family: arial, sans-serif;
+border-collapse: collapse;
+width: 90%;
+}
+th {
+border: 1px solid #dddddd;
+text-align: center;
+padding: 8px;
+font-size:20px;
+color:white;
+line-height:30px;
+border-spacing: 5px;
+
+}
+td {
+border: 1px solid #dddddd;
+text-align: center;
+padding: 8px;
+font-size:15px;
+color:white;
+line-height:30px;
+border-spacing: 5px;
+
+}
+
+tr:nth-child(even) {
+background-color: #dddddd;
+z-index: -1;
+font-size:15px;
+color:white;
+line-height:30px;
+border-spacing: 5px;
+text-align: center;
+}

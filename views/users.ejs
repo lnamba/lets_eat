@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title></title>
+</head>
+
+<body>
+
+  <span style="color:white">Users page.</span>
+  <br>
+  <caption style="font-size:25px; font-color:white; text-align: center">Users</caption>
+  <table style="width:70%">
+    <th>Name</th>
+    <th>Email</th>
+    <th>User Name</th>
+    <th>About</th>
+    <% for (var i = 0; i < data.length; i++) {%>
+      <tr>
+        <td>
+          <%= data[i].name %>
+            <td/>
+            <td>
+              <%= data[i].email %>
+            </td>
+            <td>
+              <%= data[i].username %>
+            </td>
+            <td>
+              <%= data[i].about %>
+            </td>
+      </tr>
+      <% } %>
+  </table>
+  <br>
+</body>
+
+</html>
