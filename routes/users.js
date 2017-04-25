@@ -32,11 +32,11 @@ router.post('/:id', function(req, res, next) {
 });
 
 //route to get add user page
-router.get('/add', function (req, res, next) {
+router.get('/signup', function (req, res, next) {
   res.render('users/add');
 });
 //route for the form on the add user page
-router.post('/add', function (req, res, next) {
+router.post('/signup', function (req, res, next) {
   knex.raw(`INSERT into users (email, password, name, about) values ('${req.body.email}', ${req.body.password}, ${req.body.name}, ${req.body.about})`)
   .then(function (val) {
     res.redirect("/users");
