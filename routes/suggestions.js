@@ -6,10 +6,13 @@ var knex = require('../db/knex');
 // Only admin can see this list of all suggestions
 router.get('/', function(req, res, next) {
   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
-    console.log(payload.rows);
-    res.render('suggestions/index', {
-      title: "Suggestions",
-      suggestions: payload.rows
+    knex.raw(`SELECT users.name FROM users JOIN suggestions ON users.id = suggestions.user_id`)
+    .then(function(users_name) {
+      res.render('suggestions/index', {
+        title: "Suggestions",
+        suggestions: payload.rows,
+        users_name: users_name.rows
+      });
     });
   });
 });
@@ -28,6 +31,7 @@ router.post('/', function(req, res, next) {
 router.post('/:id', function(req, res, next) {
   knex.raw(`UPDATE suggestions SET accept_meal = TRUE WHERE id = ${req.params.id}`)
   .then(function() {
+    res.cookie('accepted_meal', true);
     res.render('users/index')
   });
 });
