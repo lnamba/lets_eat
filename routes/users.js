@@ -8,10 +8,12 @@ var knex = require('../db/knex');
 // });
 
 //Get list of all users
-router.get('/', function(req, res, next) {
+router.get('/:id/view_dinner', function(req, res, next) {
   knex.raw(`SELECT * from users`)
   .then(function (users) {
-    res.render('users/index', {users: users.rows});
+    knex.raw(`SELECT * FROM suggestions`).then(function(suggestions) {
+      res.render('users/view_dinner', {users: users.rows, suggestions:suggestions.rows});
+    })
   });
 });
 
@@ -29,18 +31,6 @@ router.post('/:id', function(req, res, next) {
             about = '${req.body.about}',
             WHERE id=${req.params.id}`).then(function (users) {
     res.redirect(`/users/${req.params.id}`);
-  });
-});
-
-//route to get add user page
-router.get('/signup', function (req, res, next) {
-  res.render('users/index');
-});
-//route for the form on the add user page
-router.post('/signup', function (req, res, next) {
-  knex.raw(`INSERT into users (email, password, name, about) values ('${req.body.email}', ${req.body.password}, ${req.body.name}, ${req.body.about})`)
-  .then(function (val) {
-    res.redirect("/users");
   });
 });
 

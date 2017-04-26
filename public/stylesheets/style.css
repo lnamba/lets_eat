@@ -51,16 +51,31 @@ h1 {
 
 /*USER INDEX PAGE*/
 
-#greeting_menu {
-  max-width: 80vw;
-  margin: 0 auto;
+.user_div {
+  border: solid 2px black;
+  max-width: 75vw;
+  margin: 25px auto;
+  padding: 20px;
+}
 
+.user_input {
+  display: block;
+  margin: 15px;
+}
+
+#meal_img {
+  width: 250px;
+  border: 5px solid black;
 }
 
 /*SUGGESTION PAGE*/
 
 #suggestion_table {
   border-collapse: collapse;
+}
+
+#suggestion_table thead td {
+  font-weight: bold;
 }
 
 #suggestion_table td {
