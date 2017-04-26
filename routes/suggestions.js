@@ -6,6 +6,7 @@ var knex = require('../db/knex');
 // Only admin can see this list of all suggestions
 router.get('/', function(req, res, next) {
   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
+    console.log(payload.rows);
     res.render('suggestions/index', {
       title: "Suggestions",
       suggestions: payload.rows

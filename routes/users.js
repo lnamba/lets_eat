@@ -34,7 +34,7 @@ router.post('/:id', function(req, res, next) {
 
 //route to get add user page
 router.get('/signup', function (req, res, next) {
-  res.render('users/add');
+  res.render('users/index');
 });
 //route for the form on the add user page
 router.post('/signup', function (req, res, next) {

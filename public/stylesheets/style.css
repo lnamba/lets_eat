@@ -47,3 +47,17 @@ line-height:30px;
 border-spacing: 5px;
 text-align: center;
 }
+
+/*LOGIN PAGE*/
+h1 {
+  color: green;
+  display: inline;
+}
+
+/*USER INDEX PAGE*/
+
+#greeting_menu {
+  max-width: 80vw;
+  margin: 0 auto;
+  dis
+}
