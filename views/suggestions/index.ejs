@@ -1,16 +1,19 @@
 <h1><%= title %></h1>
+<%  %>
 
-<table id="suggestion_table">
-  <thead>
-    <tr>
-      <td>Meal</td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
+  <table id="suggestion_table">
+    <thead>
+      <tr>
+        <td>Meal</td>
+        <td>Suggested By</td>
+        <td>Accept</td>
+      </tr>
+    </thead>
+    <tbody>
+
       <% for (var i = 0; i < suggestions.length; i++) { %>
-        <%= suggestions[i].meal_name %>
+        <tr><td><%= suggestions[i].meal_name %></td><td><%= suggestions[i].user_id %></td><td><form action="/suggestions/<%= suggestions[i].id %>" method="post"><input type="submit" value="Accept"></form></td></tr>
       <% } %>
-    </tr>
-  </tbody>
-</table>
+
+    </tbody>
+  </table>

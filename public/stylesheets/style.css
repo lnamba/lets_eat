@@ -54,5 +54,16 @@ h1 {
 #greeting_menu {
   max-width: 80vw;
   margin: 0 auto;
-  dis
+
+}
+
+/*SUGGESTION PAGE*/
+
+#suggestion_table {
+  border-collapse: collapse;
+}
+
+#suggestion_table td {
+  border: 2px solid black;
+  color: black;
 }
