@@ -12,8 +12,13 @@ router.get('/', function(req, res, next) {
 
 //Route for setting the cookie upon login
 router.post('/', function(req, res, next) {
-  res.cookie("login", true, {signed: true});
-  res.redirect('/users/');
+  if (req.cookie.accepted_meal) {
+    res.cookie('login', true, {signed: true});
+    res.render('users/view_dinner')
+  } else {
+    res.cookie('login', true, {signed: true});
+    res.render('users/suggest_dinner')
+  }
 });
 
 
