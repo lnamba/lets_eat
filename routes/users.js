@@ -11,7 +11,10 @@ var knex = require('../db/knex');
 router.get('/', function(req, res, next) {
   knex.raw(`SELECT * from users`)
   .then(function (users) {
-    res.render('users/index', {users: users.rows});
+    knex.raw(`SELECT accept_meal FROM suggestions`)
+    .then(function(accept_meal) {
+      res.render('users/index', {users: users.rows, accept_meal: accept_meal.rows});
+    })
   });
 });
 
