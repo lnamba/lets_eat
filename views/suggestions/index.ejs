@@ -1,0 +1,16 @@
+<h1><%= title %></h1>
+
+<table id="suggestion_table">
+  <thead>
+    <tr>
+      <td>Meal</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <% for (var i = 0; i < suggestions.length; i++) { %>
+        <%= suggestions[i].meal_name %>
+      <% } %>
+    </tr>
+  </tbody>
+</table>
