@@ -606,9 +606,11 @@ h6 { font-size: 18px; }
 		font-weight: normal;
 	}
 	.features-list{
+
 	}
 		.features-list li {
 			margin-top: 20px;
+
 		}
 			.features-list li .fa {
 				margin-top: 15px;
