@@ -4,7 +4,7 @@ var knex = require('../db/knex');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('about');
+  res.render('index');
 });
 
 module.exports = router;
