@@ -42,12 +42,12 @@ router.post('/:id', function(req, res, next) {
 });
 
 // admin can update accept_meal to true - accepted for that day
-// router.post('/:id/accept', function(req, res, next) {
-//   knex.raw(`UPDATE suggestions SET accept_meal = TRUE WHERE id = ${req.params.id}`)
-//   .then(function() {
-//     res.cookie('accepted_meal', true);
-//     res.redirect('/suggestions')
-//   });
-// });
+router.post('/:id/accepted', function(req, res, next) {
+  knex.raw(`UPDATE suggestions SET accept_meal = TRUE WHERE id = ${req.params.id}`)
+  .then(function() {
+    res.cookie('accepted_meal', true);
+    res.redirect('/suggestions')
+  });
+});
 
 module.exports = router;
