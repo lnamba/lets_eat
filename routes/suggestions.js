@@ -6,19 +6,38 @@ var knex = require('../db/knex');
 // Only admin can see this list of all suggestions
 
 //need on delete cascade to eliminate food suggestion when user deleted
-router.get('/', function(req, res, next) {
+router.get('/:id', function(req, res, next) {
   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
     knex.raw(`SELECT users.name FROM users JOIN suggestions ON users.id = suggestions.user_id`)
     .then(function(users_name) {
-      console.log(users_name.rows);
-      res.render('suggestions/index', {
-        title: "Suggestions",
-        suggestions: payload.rows,
-        users_name: users_name.rows
+      knex.raw(`SELECT * FROM users`).then(function(user) {
+        console.log(user);
+        res.render('suggestions/index', {
+          title: "Suggestions",
+          suggestions: payload.rows,
+          users_name: users_name.rows,
+          user:user.rows[0]
+        });
       });
     });
   });
 });
+
+// admin is able to edit profile
+router.post('/:id/edit', function(req, res, next) {
+  knex.raw(`UPDATE users SET email = '${req.body.email}',
+  name = '${req.body.name}',
+  bout = '${req.body.about}'
+  WHERE id = ${req.params.id}`).then(function() {
+    knex.raw(`SELECT * FROM users WHERE id = ${req.params.id}`).then(function(user) {
+      res.render('suggestions/confirmed', {
+        user:user.rows[0],
+        message: "Your information has been recorded."
+      })
+    })
+  })
+})
+
 // router.get('/', function(req, res, next) {
 //   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
 //     knex.raw(`SELECT users.name FROM users JOIN suggestions ON users.id = suggestions.user_id`)
