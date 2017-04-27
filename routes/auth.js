@@ -13,13 +13,20 @@ router.get('/', function(req, res, next) {
 //Route for setting the cookie upon login
 router.post('/', function(req, res, next) {
   knex.raw(`SELECT * FROM users WHERE email = '${req.body.email}'`).then(function(user) {
-    console.log(user.rows);
-    if (req.cookies.accepted_meal) {
+    console.log(user.rows[0]);
+    if (user.rows[0].role === 2) {
+      if (req.cookies.accepted_meal) {
+        res.cookie('login', true, {signed: true});
+        res.redirect(`/users/${user.rows[0].id}/view_dinner`)
+      } else {
+        res.cookie('login', true, {signed: true});
+        res.redirect(`/users/${user.rows[0].id}/suggest_dinner`)
+      }
+    } else if (user.rows[0].role === 1) {
       res.cookie('login', true, {signed: true});
-      res.redirect(`/users/${user.rows[0].id}/view_dinner`)
+      res.redirect(`/suggestions`)
     } else {
-      res.cookie('login', true, {signed: true});
-      res.redirect(`/users/${user.rows[0].id}/suggest_dinner`)
+      res.redirect('/auth')
     }
   });
 });
