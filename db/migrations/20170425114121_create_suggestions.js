@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.boolean('accept_meal');
     table.text('meal_name');
     table.integer('user_id');
+    table.foreign('user_id').references('users.id').onDelete('cascade');
     table.timestamp('created_at').defaultTo(knex.fn.now());
   });
 };

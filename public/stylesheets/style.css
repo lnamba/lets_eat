@@ -893,6 +893,24 @@ h6 { font-size: 18px; }
 			box-shadow: none;
 }
 
+
+.user_div {
+  border: solid 2px black;
+  max-width: 75vw;
+  margin: 25px auto;
+  padding: 20px;
+}
+
+.user_input {
+  display: block;
+  margin: 15px;
+}
+
+#meal_img {
+  width: 250px;
+  border: 5px solid black;
+
+
 #main-slider .carousel-caption > .row > div .btn,
 .dishes-box-content .btn,
 .article-post .btn,
@@ -911,6 +929,7 @@ h6 { font-size: 18px; }
 	-webkit-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
 	   -moz-box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
 	        box-shadow: 0 4px 2px rgba(0, 0, 0, 0.4);
+
 }
 
 .font-awesome,
@@ -926,6 +945,15 @@ h6 { font-size: 18px; }
 	   -moz-transition: all 0.5s ease 0s;
 		    transition: all 0.5s ease 0s;
 }
+
+#suggestion_table thead td {
+  font-weight: bold;
+}
+
+#suggestion_table td {
+  border: 2px solid black;
+  color: black;
+
 
 .animation-1,
 .animation-1 a {

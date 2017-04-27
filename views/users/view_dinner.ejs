@@ -1,0 +1,39 @@
+<h1>Welcome <%= user.name %>!</h1>
+<% var meal = '' %>
+<% for (var i = 0; i < suggestions.length; i++) { %>
+  <% if (suggestions[i].accept_meal) { %>
+    <% meal = suggestions[i].meal_name %>
+  <% } %>
+<% } %>
+
+<% console.log(meal) %>
+
+<div id="greeting_menu" class="user_div">
+  <h2><%= meal.charAt(0).toUpperCase() %><%= meal.slice(1) %> tonight!</h2>
+</div>
+
+<div id="edit_user" class="user_div">
+  <h2>Edit User Info</h2>
+  <form action="/users/<%= user.id %>/view_dinner" method="post">
+    <label for="name">Name: </label>
+    <input type="text" name="name" class="user_input" value="<%= user.name %>">
+    <label for="email">Email: </label>
+    <input type="text" name="email" class="user_input" value="<%= user.email %>">
+    <label for="about">About: </label>
+    <textarea name="about" rows="3" cols="80" class="user_input"><%= user.about %></textarea>
+    <input type="submit" name="edit" value="Edit" class="user_input">
+  </form>
+</div>
+
+<form action="/users/<%= user.id %>/delete" method="post">
+  <input type="submit" name="delete" value="Delete Account">
+</form>
+
+<script type="text/javascript">
+  var meal = '<%= meal %>'
+  console.log(meal);
+  $.getJSON(`https://api.edamam.com/search?q=${meal}/`, function(data) {
+    $('#greeting_menu').append(`<img id="meal_img" src="${data.hits[0].recipe.image}">`)
+    console.log(data.hits[0].recipe.label);
+  });
+</script>

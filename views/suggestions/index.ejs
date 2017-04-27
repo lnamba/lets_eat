@@ -1,5 +1,4 @@
 <h1><%= title %></h1>
-<%  %>
 
   <table id="suggestion_table">
     <thead>
@@ -12,7 +11,7 @@
     <tbody>
 
       <% for (var i = 0; i < suggestions.length; i++) { %>
-        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td><form action="/suggestions/<%= suggestions[i].id %>" method="post"><input type="submit" value="Accept"></form></td></tr>
+        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td><form action="/suggestions/<%= suggestions[i].id %>/accepted" method="post"><input type="submit" value="Accept"></form></td></tr>
       <% } %>
 
     </tbody>
