@@ -1,0 +1,32 @@
+<h1>Welcome <%= user.name %>!</h1>
+
+
+<div id="greeting_menu" class="user_div">
+  <h2>What do you want for dinner?</h2>
+  <h2>I want: </h2>
+  <form action="/suggestions/<%= user.id %>" method="post">
+    <input type="text" name="meal_name" placeholder="Your request here.">
+    <input type="submit" name="submit" value="Make Suggestion">
+  </form>
+</div>
+
+<div id="edit_user" class="user_div">
+  <h2>Edit User Info</h2>
+  <form action="/users/<%= user.id %>/suggest_dinner" method="post">
+    <label for="name">Name: </label>
+    <input type="text" name="name" class="user_input" value="<%= user.name %>">
+    <label for="email">Email: </label>
+    <input type="text" name="email" class="user_input" value="<%= user.email %>">
+    <label for="about">About: </label>
+    <textarea name="about" rows="3" cols="80" class="user_input"><%= user.about %></textarea>
+    <input type="submit" name="edit" value="Edit" class="user_input">
+  </form>
+</div>
+
+<form action="/users/<%= user.id %>/delete" method="post">
+  <input type="submit" name="delete" value="Delete Account">
+</form>
+
+<script type="text/javascript">
+
+</script>
