@@ -16,7 +16,7 @@ a:focus { outline: none; }
 /* Heading Styles Starts */
 
 h1,
-h2, 
+h2,
 h3,
 h4,
 h5,
@@ -94,8 +94,8 @@ h6 { font-size: 18px; }
 
 #nav {
 	margin-bottom: 0;
-	padding-top: 15px;
-	padding-bottom: 10px;
+	padding-top: 20px;
+	padding-bottom: 15px;
 }
 #nav.sticky-nav {
 	width: 100%;
