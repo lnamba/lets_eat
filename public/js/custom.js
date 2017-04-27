@@ -1,12 +1,12 @@
 $(function() {
 
     "use strict";
-	
+
 	// REMOVE # FROM URL
 	$( 'a[href="#"]' ).click( function(event) {
 		event.preventDefault();
-	});	
-	
+	});
+
 	// STICKY NAV
 	var stickyHeaderTop = $("#main-slider").height();
 	//var stickyHeaderTop = $(window).height();
@@ -20,7 +20,7 @@ $(function() {
 			$(".sticky-nav").removeClass("fixednav");
         }
     });
-	
+
 	// ONE PAGE NAV
 	$("#nav").onePageNav({
 		currentClass: 'current',
@@ -39,7 +39,7 @@ $(function() {
 			//I get fired when you enter a section and I pass the list item of the section
 		}
 	});
-	
+
 	// Dishes FILTERS
 	var $grid = $('#dishes-grid');
 	$grid.shuffle({
@@ -56,7 +56,7 @@ $(function() {
 		// reshuffle grid
 		$grid.shuffle('shuffle', groupName );
 	});
-	
+
 	// Blog Carousel
 	$("#article-carousel").owlCarousel({
 		autoPlay: true, //Set AutoPlay to 3 seconds
@@ -66,17 +66,17 @@ $(function() {
 		pagination : false,
 		navigationText : ["<span class='fa fa-angle-left animation'></span>","<span class='fa fa-angle-right animation'></span>"]
 	});
-	
+
 	// GOOGLE MAP
 	$(".map-wrap").height(300);
 	function initialize($) {
-		var mapOptions = {	
+		var mapOptions = {
 			zoom: 8,
-			center: new google.maps.LatLng(17.421306, 78.457553),
+			center: new google.maps.LatLng(33.441366, -112.047897),
 			disableDefaultUI: true
 		};
 		var map = new google.maps.Map(document.querySelector('.map-wrap'), mapOptions);
 	}
 	google.maps.event.addDomListener(window, 'load', initialize);
-	
+
 });
