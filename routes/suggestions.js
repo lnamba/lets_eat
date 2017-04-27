@@ -7,7 +7,7 @@ var knex = require('../db/knex');
 
 router.post('/undo', function(req, res, next) {
   console.log(req.body);
-  knex.raw(`UPDATE suggestions SET accept_meal = FALSE WHERE id = ${req.body.id}`)
+  knex.raw(`UPDATE suggestions SET accept_meal = FALSE`)
   .then(function() {
     res.clearCookie('accepted_meal');
     res.redirect(`/suggestions/${req.body.id}`)
