@@ -1,12 +1,9 @@
-/*! Backstretch - v2.0.4 - 2013-06-19
-* http://srobbin.com/jquery-plugins/backstretch/
-* Copyright (c) 2013 Scott Robbin; Licensed MIT */
 
 ;(function ($, window, undefined) {
   'use strict';
 
-  /* PLUGIN DEFINITION
-   * ========================= */
+  //* PLUGIN DEFINITION
+
 
   $.fn.backstretch = function (images, options) {
     // We need at least one image or method name
@@ -14,10 +11,8 @@
       $.error("No images were supplied for Backstretch");
     }
 
-    /*
-     * Scroll the page one pixel to get the right window height on iOS
-     * Pretty harmless for everyone else
-    */
+ // Scroll the page one pixel to get the right window height on iOS Pretty harmless for everyone else
+
     if ($(window).scrollTop() === 0 ) {
       window.scrollTo(0, 0);
     }
@@ -27,21 +22,26 @@
         , obj = $this.data('backstretch');
 
       // Do we already have an instance attached to this element?
+
       if (obj) {
 
         // Is this a method they're trying to execute?
+
         if (typeof images == 'string' && typeof obj[images] == 'function') {
           // Call the method
           obj[images](options);
 
           // No need to do anything further
+
           return;
         }
 
         // Merge the old options with the new
+
         options = $.extend(obj.options, options);
 
         // Remove the old instance
+
         obj.destroy(true);
       }
 
@@ -51,34 +51,35 @@
   };
 
   // If no element is supplied, we'll attach to body
+
   $.backstretch = function (images, options) {
+
     // Return the instance
+
     return $('body')
             .backstretch(images, options)
             .data('backstretch');
   };
 
   // Custom selector
+
   $.expr[':'].backstretch = function(elem) {
     return $(elem).data('backstretch') !== undefined;
   };
 
-  /* DEFAULTS
-   * ========================= */
+  // DEFAULTS
 
   $.fn.backstretch.defaults = {
-      centeredX: true   // Should we center the image on the X axis?
-    , centeredY: true   // Should we center the image on the Y axis?
-    , duration: 5000    // Amount of time in between slides (if slideshow)
-    , fade: 0           // Speed of fade transition between slides
+      centeredX: true   // Question1: Should we center the image on the X axis?
+    , centeredY: true   // Question2: Should we center the image on the Y axis?
+    , duration: 5000    // The amount of time in between slides (if slideshow)
+    , fade: 0           // The speed of fade transition between slides
   };
 
-  /* STYLES
-   * 
-   * Baked-in styles that we'll apply to our elements.
-   * In an effort to keep the plugin simple, these are not exposed as options.
-   * That said, anyone can override these in their own stylesheet.
-   * ========================= */
+  // STYLES
+
+   //Baked-in styles that we'll apply to our elements.In an effort to keep this plugin simple, these are not exposed as options. With that said, anyone in our team can override these in their own stylesheet.
+
   var styles = {
       wrap: {
           left: 0
@@ -104,39 +105,40 @@
       }
   };
 
-  /* CLASS DEFINITION
-   * ========================= */
+  // CLASS DEFINITION
+
   var Backstretch = function (container, images, options) {
     this.options = $.extend({}, $.fn.backstretch.defaults, options || {});
 
-    /* In its simplest form, we allow Backstretch to be called on an image path.
-     * e.g. $.backstretch('/path/to/image.jpg')
-     * So, we need to turn this back into an array.
-     */
+    // In its simplest form, we allow Backstretch to be called on an image path. e.g. $.backstretch('/path/to/image.jpg') So, we need to turn this back into an array.
+
     this.images = $.isArray(images) ? images : [images];
 
     // Preload images
+
     $.each(this.images, function () {
       $('<img />')[0].src = this;
-    });    
+    });
 
-    // Convenience reference to know if the container is body.
+    // This is a convenient reference to know if the container is body.
+
     this.isBody = container === document.body;
 
-    /* We're keeping track of a few different elements
-     *
-     * Container: the element that Backstretch was called on.
-     * Wrap: a DIV that we place the image into, so we can hide the overflow.
-     * Root: Convenience reference to help calculate the correct height.
-     */
+    // We're keeping track of a few different elements
+    // Container: the element that Backstretch was called on.
+    // Wrap: a DIV that we place the image into, so we can hide the overflow.
+    // Root: Convenience reference to help calculate the correct height.
+
     this.$container = $(container);
     this.$root = this.isBody ? supportsFixedPosition ? $(window) : $(document) : this.$container;
 
     // Don't create a new wrap if one already exists (from a previous instance of Backstretch)
+
     var $existing = this.$container.children(".backstretch").first();
     this.$wrap = $existing.length ? $existing : $('<div class="backstretch"></div>').css(styles.wrap).appendTo(this.$container);
 
-    // Non-body elements need some style adjustments
+    // Non-body elements that need some style adjustments
+
     if (!this.isBody) {
       // If the container is statically positioned, we need to make it relative,
       // and if no zIndex is defined, we should set it to zero.
@@ -148,24 +150,29 @@
         , zIndex: zIndex === 'auto' ? 0 : zIndex
         , background: 'none'
       });
-      
-      // Needs a higher z-index
+
+      // This needed a higher z-index
+
       this.$wrap.css({zIndex: -999998});
     }
 
-    // Fixed or absolute positioning?
+    // You can choose a fixed or absolute positioning?
     this.$wrap.css({
       position: this.isBody && supportsFixedPosition ? 'fixed' : 'absolute'
     });
 
     // Set the first image
+
     this.index = 0;
     this.show(this.index);
 
     // Listen for resize
+
     $(window).on('resize.backstretch', $.proxy(this.resize, this))
              .on('orientationchange.backstretch', $.proxy(function () {
+
                 // Need to do this in order to get the right window height
+
                 if (this.isBody && window.pageYOffset === 0) {
                   window.scrollTo(0, 1);
                   this.resize();
@@ -173,8 +180,8 @@
              }, this));
   };
 
-  /* PUBLIC METHODS
-   * ========================= */
+  //PUBLIC METHODS
+
   Backstretch.prototype = {
       resize: function () {
         try {
@@ -186,6 +193,7 @@
             , bgOffset;
 
             // Make adjustments based on image ratio
+
             if (bgHeight >= rootHeight) {
                 bgOffset = (bgHeight - rootHeight) / 2;
                 if(this.options.centeredY) {
@@ -203,46 +211,56 @@
             this.$wrap.css({width: rootWidth, height: rootHeight})
                       .find('img:not(.deleteable)').css({width: bgWidth, height: bgHeight}).css(bgCSS);
         } catch(err) {
-            // IE7 seems to trigger resize before the image is loaded.
-            // This try/catch block is a hack to let it fail gracefully.
+
+
+            // Documentation showed me how to use this try/catch block is a hack to let it fail gracefully.
         }
 
         return this;
       }
 
       // Show the slide at a certain position
+
     , show: function (newIndex) {
 
-        // Validate index
+        // Validate the index
+
         if (Math.abs(newIndex) > this.images.length - 1) {
           return;
         }
 
         // Vars
+
         var self = this
           , oldImage = self.$wrap.find('img').addClass('deleteable')
           , evtOptions = { relatedTarget: self.$container[0] };
 
         // Trigger the "before" event
-        self.$container.trigger($.Event('backstretch.before', evtOptions), [self, newIndex]); 
+
+        self.$container.trigger($.Event('backstretch.before', evtOptions), [self, newIndex]);
 
         // Set the new index
+
         this.index = newIndex;
 
         // Pause the slideshow
+
         clearInterval(self.interval);
 
         // New image
+
         self.$img = $('<img />')
                       .css(styles.img)
                       .bind('load', function (e) {
                         var imgWidth = this.width || $(e.target).width()
                           , imgHeight = this.height || $(e.target).height();
-                        
+
                         // Save the ratio
+
                         $(this).data('ratio', imgWidth / imgHeight);
 
                         // Show the image, then delete the old one
+
                         // "speed" option has been deprecated, but we want backwards compatibilty
                         $(this).fadeIn(self.options.speed || self.options.fade, function () {
                           oldImage.remove();
@@ -264,7 +282,7 @@
                       })
                       .appendTo(self.$wrap);
 
-        // Hack for IE img onload event
+        // Hack for an img onload event
         self.$img.attr('src', self.images[newIndex]);
         return self;
       }
@@ -310,14 +328,17 @@
 
     , destroy: function (preserveBackground) {
         // Stop the resize events
+
         $(window).off('resize.backstretch orientationchange.backstretch');
 
         // Clear the interval
+
         clearInterval(this.interval);
 
         // Remove Backstretch
+
         if(!preserveBackground) {
-          this.$wrap.remove();          
+          this.$wrap.remove();
         }
         this.$container.removeData('backstretch');
       }
@@ -350,25 +371,25 @@
       , ieversion = !!iematch && iematch[ 1 ];
 
     return !(
-      // iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
+      // Copied from documentation: iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
       ((platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534) ||
-      
-      // Opera Mini
+
+      // Another documentation on clients using Opera Mini browser
       (window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]") ||
       (operammobilematch && omversion < 7458) ||
-      
-      //Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+
+      //Documentation shows us to: Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
       (ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533) ||
-      
-      // Firefox Mobile before 6.0 -
+
+      // And to us this: Firefox Mobile before 6.0 -
       (ffversion && ffversion < 6) ||
-      
-      // WebOS less than 3
+
+      // And this...WebOS less than 3
       ("palmGetResource" in window && wkversion && wkversion < 534) ||
-      
-      // MeeGo
+
+      // Found documentation on adding this: MeeGo
       (ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1) ||
-      
+
       // IE6
       (ieversion && ieversion <= 6)
     );
