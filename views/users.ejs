@@ -14,21 +14,21 @@
   <table style="width:70%">
     <th>Name</th>
     <th>Email</th>
-    <th>User Name</th>
+    <th>Username</th>
     <th>About</th>
-    <% for (var i = 0; i < data.length; i++) {%>
+    <% for (var i = 0; i < users.length; i++) {%>
       <tr>
         <td>
-          <%= data[i].name %>
+          <%= users[i].name %>
             <td/>
             <td>
-              <%= data[i].email %>
+              <%= users[i].email %>
             </td>
             <td>
-              <%= data[i].username %>
+              <%= users[i].username %>
             </td>
             <td>
-              <%= data[i].about %>
+              <%= users[i].about %>
             </td>
       </tr>
       <% } %>
