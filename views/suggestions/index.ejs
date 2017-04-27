@@ -1,4 +1,31 @@
+<% var cookie_accept = cookie_accept %>
 <h1><%= title %></h1>
+
+
+<% if (cookie_accept) { %>
+  <table id="suggestion_table">
+    <thead>
+      <tr>
+        <td>Meal</td>
+        <td>Suggested By</td>
+        <td>Accept</td>
+      </tr>
+    </thead>
+    <tbody>
+
+      <% for (var i = 0; i < suggestions.length; i++) { %>
+        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td>Meal Already Selected</td></tr>
+      <% } %>
+
+    </tbody>
+  </table>
+
+  <form action="/suggestions/undo" method="post">
+    <input type="hidden" value="<%= user.id %>" name="id">
+    <input type="submit" value="Undo" name="submit">
+  </form>
+
+<% } else { %>
 
   <table id="suggestion_table">
     <thead>
@@ -16,6 +43,8 @@
 
     </tbody>
   </table>
+<% } %>
+
 
   <div id="edit_user" class="user_div">
     <h2>Edit User Info</h2>
@@ -29,3 +58,7 @@
       <input type="submit" name="edit" value="Edit" class="user_input">
     </form>
   </div>
+
+  <script type="text/javascript">
+
+  </script>

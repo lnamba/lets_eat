@@ -5,6 +5,15 @@ var knex = require('../db/knex');
 /* GET users listing. */
 // Only admin can see this list of all suggestions
 
+router.post('/undo', function(req, res, next) {
+  console.log(req.body);
+  knex.raw(`UPDATE suggestions SET accept_meal = FALSE WHERE id = ${req.body.id}`)
+  .then(function() {
+    res.clearCookie('accepted_meal');
+    res.redirect(`/suggestions/${req.body.id}`)
+  })
+})
+
 //need on delete cascade to eliminate food suggestion when user deleted
 router.get('/:id', function(req, res, next) {
   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
@@ -12,11 +21,16 @@ router.get('/:id', function(req, res, next) {
     .then(function(users_name) {
       knex.raw(`SELECT * FROM users`).then(function(user) {
         console.log(user);
+        var cookie_accept = false;
+        if (req.cookies.accepted_meal) {
+          cookie_accept = true;
+        }
         res.render('suggestions/index', {
           title: "Suggestions",
           suggestions: payload.rows,
           users_name: users_name.rows,
-          user:user.rows[0]
+          user:user.rows[0],
+          cookie_accept
         });
       });
     });
@@ -65,8 +79,10 @@ router.post('/:id/accepted', function(req, res, next) {
   knex.raw(`UPDATE suggestions SET accept_meal = TRUE WHERE id = ${req.params.id}`)
   .then(function() {
     res.cookie('accepted_meal', true);
-    res.redirect('/suggestions')
+    res.redirect(`/suggestions/${req.params.id}`)
   });
 });
+
+
 
 module.exports = router;
