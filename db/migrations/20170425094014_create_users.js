@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('name');
     table.text('about');
     table.integer('role');
+    table.foreign('role').references('roles.id');
   });
 };
 

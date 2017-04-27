@@ -19,7 +19,7 @@ router.post('/', function(req, res, next) {
       res.redirect(`/users/${user.rows[0].id}/view_dinner`)
     } else {
       res.cookie('login', true, {signed: true});
-      res.render('users/suggest_dinner')
+      res.redirect(`/users/${user.rows[0].id}/suggest_dinner`)
     }
   });
 });
