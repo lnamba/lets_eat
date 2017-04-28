@@ -1,6 +1,21 @@
 <% var cookie_accept = cookie_accept %>
-<h1><%= title %></h1>
 
+<h1>Welcome <%= user.name %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>Name</td>
+      <td>Email</td>
+      <td>Delete User</td>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (var i = 0; i < all_users.length; i++) { %>
+      <tr><td><%= all_users[i].name %></td><td><%= all_users[i].email %></td><td><a href="/dash/<%= all_users[i].id %>/delete">DELETE</a></td></tr>
+    <% } %>
+  </tbody>
+</table>
 
 <% if (cookie_accept) { %>
   <table id="suggestion_table">
@@ -48,7 +63,7 @@
 
   <div id="edit_user" class="user_div">
     <h2>Edit User Info</h2>
-    <form action="/suggestions/<%= user.id %>/edit" method="post">
+    <form action="/dash/<%= user.id %>/edit" method="post">
       <label for="name">Name: </label>
       <input type="text" name="name" class="user_input" value="<%= user.name %>">
       <label for="email">Email: </label>
