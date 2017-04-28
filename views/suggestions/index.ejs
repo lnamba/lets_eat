@@ -1,18 +1,38 @@
-<h1><%= title %></h1>
 
-  <table id="suggestion_table">
-    <thead>
-      <tr>
-        <td>Meal</td>
-        <td>Suggested By</td>
-        <td>Accept</td>
-      </tr>
-    </thead>
-    <tbody>
 
-      <% for (var i = 0; i < suggestions.length; i++) { %>
-        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td><form action="/suggestions/<%= suggestions[i].id %>/accepted" method="post"><input type="submit" value="Accept"></form></td></tr>
-      <% } %>
 
-    </tbody>
-  </table>
+<section id="order" class="section-area inverse order-section parallax">
+<!-- Nested Container Starts -->
+  <div class="container">
+  <!-- Nested Row Starts -->
+    <div class="row">
+    <!-- Features Starts -->
+      <div class="col-md-8 col-sm-7 col-xs-12">
+        <h1>Dinner suggestions for today:</h1>
+        <table id="suggestion_table">
+          <thead>
+            <tr>
+              <td>Meal:</td>
+              <td>Suggested By:</td>
+            </tr>
+          </thead>
+          <tbody class="suggestions">
+
+            <% for (var i = 0; i < suggestions.length; i++) {
+              %><tr>
+              <td><%= suggestions[i].meal_name %></td>
+              <td><%= users_name[i].name %></td>
+              <td><form action="/suggestions/<%= suggestions[i].id %>/accepted" method="post"><input type="submit" value="Accept"></form></td>
+              </tr>
+            <% } %>
+
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  <!-- Nested Row Ends -->
+  </div>
+<!-- Nested Container Ends -->
+</section>
+<!-- Order Section Ends -->
