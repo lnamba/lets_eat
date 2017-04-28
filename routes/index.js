@@ -25,6 +25,10 @@ router.post('/', function(req, res, next) {
     } else if (user.rows[0].role === 1) {
       res.cookie('login', true, {signed: true});
       res.redirect(`/suggestions/${user.rows[0].id}`)
+    } else if (user.rows[0].role === 3) {
+      res.cookie('login', true, {signed: true});
+      res.cookie('superuser', true, {signed: true})
+      res.redirect(`/dash/${user.rows[0].id}`)
     } else {
       res.redirect('/')
     }

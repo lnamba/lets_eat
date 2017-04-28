@@ -19,7 +19,7 @@ router.get('/:id', function(req, res, next) {
   knex.raw(`SELECT * FROM suggestions`).then(function(payload) {
     knex.raw(`SELECT users.name FROM users JOIN suggestions ON users.id = suggestions.user_id`)
     .then(function(users_name) {
-      knex.raw(`SELECT * FROM users`).then(function(user) {
+      knex.raw(`SELECT * FROM users WHERE id = ${req.params.id}`).then(function(user) {
         console.log(user);
         var cookie_accept = false;
         if (req.cookies.accepted_meal) {
@@ -41,7 +41,7 @@ router.get('/:id', function(req, res, next) {
 router.post('/:id/edit', function(req, res, next) {
   knex.raw(`UPDATE users SET email = '${req.body.email}',
   name = '${req.body.name}',
-  bout = '${req.body.about}'
+  about = '${req.body.about}'
   WHERE id = ${req.params.id}`).then(function() {
     knex.raw(`SELECT * FROM users WHERE id = ${req.params.id}`).then(function(user) {
       res.render('suggestions/confirmed', {
