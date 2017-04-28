@@ -16,10 +16,16 @@
               <%= users[i].email %>
             </td>
             <td>
-              <%= users[i].username %>
+              <%= users[i].password %>
             </td>
             <td>
               <%= users[i].about %>
+            </td>
+            <td>
+              <%= users[i].role %>
+            </td>
+            <td>
+              <%= users[i].id %>
             </td>
       </tr>
       <% } %>
@@ -31,6 +37,6 @@
   </a>
   <a href="#" class="list-group-item"><%= users[i].name %></a>
   <a href="#" class="list-group-item"><%= users[i].email %></a>
-  <a href="#" class="list-group-item"><%= users[i].username %></a>
+  <a href="#" class="list-group-item"><%= users[i].password %></a>
   <a href="#" class="list-group-item"><%= users[i].about %></a>
 </div>
