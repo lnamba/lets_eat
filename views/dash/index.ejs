@@ -18,7 +18,7 @@
 </table>
 
 <% if (cookie_accept) { %>
-  <table id="suggestion_table">
+  <table id="dash_table">
     <thead>
       <tr>
         <td>Meal</td>
@@ -35,14 +35,14 @@
     </tbody>
   </table>
 
-  <form action="/suggestions/undo" method="post">
+  <form action="/dash/undo" method="post">
     <input type="hidden" value="<%= user.id %>" name="id">
     <input type="submit" value="Undo" name="submit">
   </form>
 
 <% } else { %>
 
-  <table id="suggestion_table">
+  <table id="dash_table">
     <thead>
       <tr>
         <td>Meal</td>
@@ -53,7 +53,7 @@
     <tbody>
 
       <% for (var i = 0; i < suggestions.length; i++) { %>
-        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td><form action="/suggestions/<%= suggestions[i].id %>/accepted" method="post"><input type="submit" value="Accept"></form></td></tr>
+        <tr><td><%= suggestions[i].meal_name %></td><td><%= users_name[i].name %></td><td><form action="/dash/<%= suggestions[i].id %>/accepted" method="post"><input type="submit" value="Accept"></form></td></tr>
       <% } %>
 
     </tbody>
