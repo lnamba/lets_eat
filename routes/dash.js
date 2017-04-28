@@ -25,7 +25,7 @@ router.get('/:id', function(req, res, next) {
           if (req.cookies.accepted_meal) {
             cookie_accept = true;
           }
-          res.render('dash/index', {
+          res.render('dash/users', {
             user: user.rows[0],
             cookie_accept,
             suggestions: payload.rows,

@@ -60,4 +60,8 @@ router.post('/signup', function (req, res, next) {
   });
 });
 
+router.get('/test', function(req, res, next) {
+  res.render(`users`)
+})
+
 module.exports = router;
