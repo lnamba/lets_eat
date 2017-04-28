@@ -13,8 +13,8 @@ var knex = require('./db/knex');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var suggestions = require('./routes/suggestions');
+var dash = require('./routes/dash');
 var expressLayouts = require('express-ejs-layouts');
-var auth = require('./routes/auth');
 
 var app = express();
 
@@ -43,7 +43,7 @@ app.use(expressLayouts);
 app.use('/', index);
 app.use('/users', users);
 app.use('/suggestions', suggestions);
-app.use('/auth', auth);
+app.use('/dash', dash);
 
 // Redirect the user to Facebook for authentication.  When complete,
 // Facebook will redirect the user back to the application at
